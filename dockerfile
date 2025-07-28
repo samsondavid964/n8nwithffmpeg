@@ -4,16 +4,9 @@ FROM n8nio/n8n:latest
 # Switch to the root user to install packages
 USER root
 
-# Install FFmpeg and other necessary tools
-# For Debian-based images (like the n8n official image)
-RUN apt-get update && \
-    apt-get install -y ffmpeg curl wget && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# If the n8n image were Alpine-based (less common for n8n now, but good to know)
-# RUN apk add --no-cache ffmpeg curl wget && \
-#     rm -rf /var/cache/apk/*
+# Install FFmpeg and other necessary tools using apk (for Alpine Linux)
+RUN apk add --no-cache ffmpeg curl wget && \
+    rm -rf /var/cache/apk/*
 
 # Switch back to the n8n user for security best practices
 USER node
