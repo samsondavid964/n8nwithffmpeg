@@ -13,7 +13,7 @@ RUN apk add --no-cache \
     py3-pip \
     build-base \
     leptonica \
-    && pip3 install --no-cache-dir pytesseract Pillow
+    && pip3 install --break-system-packages --no-cache-dir pytesseract Pillow
 
 # Clean up to reduce image size
 RUN rm -rf /var/cache/apk/*
