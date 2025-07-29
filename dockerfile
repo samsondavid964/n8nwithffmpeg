@@ -13,7 +13,11 @@ RUN apk add --no-cache \
     py3-pip \
     build-base \
     leptonica \
-    && pip3 install --break-system-packages --no-cache-dir pytesseract Pillow
+
+# Create virtualenv for n8n Python Code node
+RUN python3 -m venv /data/python_venv && \
+    . /data/python_venv/bin/activate && \
+    pip install --no-cache-dir --break-system-packages pytesseract Pillow
 
 # Clean up to reduce image size
 RUN rm -rf /var/cache/apk/*
