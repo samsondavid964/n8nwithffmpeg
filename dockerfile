@@ -8,15 +8,23 @@ USER root
 RUN apk add --no-cache \
     tesseract-ocr \
     tesseract-ocr-data-eng \
+    leptonica \
     ffmpeg \
     python3 \
     py3-pip \
     build-base \
-    leptonica
+    nodejs \
+    npm \
+    bash \
+    curl \
+    git
 
 # Create virtualenv for n8n Python Code node
 RUN python3 -m venv /data/python_venv && \
     /data/python_venv/bin/pip install --no-cache-dir --break-system-packages pytesseract Pillow
+
+# Install common JS libraries globally for use in Function nodes
+RUN npm install -g lodash moment
 
 # Clean up to reduce image size
 RUN rm -rf /var/cache/apk/*
